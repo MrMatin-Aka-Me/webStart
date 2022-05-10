@@ -18,3 +18,5 @@ __pycache__
 /reports/report.xml
 /coverage-report/coverage.xml
 *.djcache
+media
+requirements.txt

@@ -5,11 +5,14 @@ import axio from 'axios';
 export const fetchWebStudios = createAsyncThunk(
     'webStudios/fetchList', async ({query_str, page}, {rejectedWithValue}) => {
 
-        let url = query_str ? `/api/frontend/web-studio/?page=${page}&${query_str}` : `/api/frontend/web-studio/?page=${page}`
+        let url = query_str ? `/api/web-studios/?page=${page}&${query_str}` : `/api/web-studios/?page=${page}`
 
         try {
             const elements = await axio.get(url, {
-                headers: {withCredentials: true}
+                auth:{
+                    username: 'admin',
+                    password: 'admin'
+                }
             });
             return elements.data
         } catch (err) {
@@ -21,7 +24,6 @@ export const fetchWebStudios = createAsyncThunk(
 
 export const webStudiosSlice = createSlice({
     name: 'webStudio',
-    //начальное состояние параметров -
     initialState: {
         webStudioList: [],
         error: null,
