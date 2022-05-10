@@ -1734,6 +1734,39 @@ url(/static/assets/bundles_react/c1d7432ee75fa194e499.woff?524846017b983fc8ded93
     background: linear-gradient(166deg, rgba(194,127,201,0.8) 18%, rgba(3,104,255,0.8) 100%);
 }
 
-.shadow {
-    box-shadow: 15px 0 0 lightgray;
+.btn-custom:hover{
+    background: rgb(194,127,201);
+    background: linear-gradient(166deg, rgba(194,127,201,1) 18%, rgba(3,104,255,1) 100%);
+}
+
+
+.custom-table-row {
+    transition: transform .2s;
+}
+
+.custom-table-row:hover{
+    cursor: pointer;
+    background: rgb(193,233,255);
+    background: radial-gradient(circle, rgba(193,233,255,0.8) 18%, rgba(209,193,255,0.8) 100%);
+    transform: scale(1.01);
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover{
+    color: rgba(3,104,255,1);
+}
+
+.spacer{
+    color: red;
+}
+
+/*!***********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/utils/style.css ***!
+  \***********************************************************************/
+.swalHtmlContainer{
+    text-align: start;
 }

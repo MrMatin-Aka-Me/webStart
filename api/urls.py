@@ -1,12 +1,13 @@
 from django.urls import re_path, include
 from rest_framework import routers
 
-from api.views import ContractorViewSet, ObjectViewSet, SiteTypeViewSet
+from api.views import ContractorViewSet, ObjectViewSet, SiteTypeViewSet, PriceViewSet
 
 router = routers.DefaultRouter()
 
 router.register(r'contractor', ContractorViewSet)
 router.register(r'site-types', SiteTypeViewSet)
+router.register(r'prices', PriceViewSet)
 router.register(r'objects', ObjectViewSet)
 
 urlpatterns = [

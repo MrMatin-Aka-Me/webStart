@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from webstart.models import Contractor, Object, SiteType
+from webstart.models import Contractor, Object, SiteType, Price
 
 
 class ContractorFilter(filters.FilterSet):
@@ -20,4 +20,11 @@ class SiteTypeFilter(filters.FilterSet):
 
    class Meta:
        model = SiteType
+       fields = '__all__'
+
+
+class PriceFilter(filters.FilterSet):
+
+   class Meta:
+       model = Price
        fields = '__all__'

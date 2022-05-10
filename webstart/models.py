@@ -66,11 +66,16 @@ class SiteType(models.Model):
 class Price(models.Model):
 
     class Meta:
+        unique_together = ['obj', 'site_type']
         verbose_name = 'Цена'
         verbose_name_plural = 'Цены'
 
     obj = models.ForeignKey('Object', verbose_name='Относится к объекту', related_name='price',
                             on_delete=models.CASCADE)
-    site_type = models.ForeignKey('SiteType', verbose_name='Относится к объекту', related_name='price',
+    site_type = models.ForeignKey('SiteType', verbose_name='Относится к типу сайта', related_name='price',
                             on_delete=models.CASCADE)
-    price = models.CharField(max_length=10, verbose_name='Цена', blank=True, null=True)
+    min_price = models.CharField(max_length=16, verbose_name='Минимальная цена', blank=True, null=True)
+    max_price = models.CharField(max_length=16, verbose_name='Максимальная цена', blank=True, null=True)
+
+    def __str__(self):
+        return '{} {} Минимальная цена: {} Максимальная цена: {}'.format(self.obj.name, self.site_type.type, self.min_price, self.max_price)
