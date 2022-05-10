@@ -23,11 +23,11 @@ class Object(models.Model):
         return '{}'.format(self.name)
 
 
-class WebStudio(models.Model):
+class Contractor(models.Model):
 
     class Meta:
-        verbose_name = 'Веб-студия'
-        verbose_name_plural = 'Веб-студии'
+        verbose_name = 'Подрядчик'
+        verbose_name_plural = 'Подрядчики'
 
     obj = models.OneToOneField('Object', verbose_name='Относится к объекту',
                             on_delete=models.CASCADE, primary_key=True)
@@ -38,6 +38,7 @@ class WebStudio(models.Model):
 
     def __str__(self):
         return '{}'.format(self.obj.name)
+
 
 
 class SiteType(models.Model):

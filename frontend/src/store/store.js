@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import webStudioReducer from './reducers/webStudios'
+import contractorReducer from './reducers/contractor'
 
 export default configureStore({
     reducer: {
-        webStudio: webStudioReducer,
+        contractor: contractorReducer,
     }
 })

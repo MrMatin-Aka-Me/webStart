@@ -1,9 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from webstart.models import Object, WebStudio, SiteType, Price
+from webstart.models import Object, Contractor, SiteType, Price
 
-admin.site.register((WebStudio, SiteType, Price))
+admin.site.register((Contractor, SiteType, Price))
 
 @admin.register(Object)
 class ObjectAdmin(admin.ModelAdmin):

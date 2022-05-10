@@ -11,7 +11,7 @@ const Header = () => {
             {/*<!-- Container wrapper -->*/}
             <div className="container">
                 {/*<!-- Navbar brand -->*/}
-                <a className="navbar-brand me-2" href="https://mdbgo.com/">
+                <Link className="navbar-brand me-2" to="/">
                     <img
                         src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
                         height="16"
@@ -19,7 +19,7 @@ const Header = () => {
                         loading="lazy"
                         style={{marginTop: '-1px'}}
                     />
-                </a>
+                </Link>
 
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">

@@ -1,13 +1,13 @@
 from django_filters import rest_framework as filters
 
-from webstart.models import WebStudio, Object
+from webstart.models import Contractor, Object, SiteType
 
 
-class WebStudioFilter(filters.FilterSet):
+class ContractorFilter(filters.FilterSet):
 
    class Meta:
-       model = WebStudio
-       fields = '__all__'
+       model = Contractor
+       fields = ('projects', 'obj__obj_type', 'obj__name', 'obj__id')
        exclude = ['logo']
 
 class ObjectFilter(filters.FilterSet):
@@ -16,3 +16,8 @@ class ObjectFilter(filters.FilterSet):
        model = Object
        fields = '__all__'
 
+class SiteTypeFilter(filters.FilterSet):
+
+   class Meta:
+       model = SiteType
+       fields = '__all__'
