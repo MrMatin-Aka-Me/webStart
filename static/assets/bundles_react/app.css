@@ -1764,6 +1764,11 @@ url(/static/assets/bundles_react/c1d7432ee75fa194e499.woff?524846017b983fc8ded93
     color: red;
 }
 
+.loading, .loading a{
+    background-color: rgba(211, 211, 211, 0.2);
+    color: lightgray;
+}
+
 /*!***********************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/utils/style.css ***!
   \***********************************************************************/
