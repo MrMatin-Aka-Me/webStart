@@ -6,9 +6,9 @@ export function showSmallInfo(contractor) {
 
     let contacts = contractor.obj.obj_type === 'web_studio' ? `<div>
             <h5>Адрес:</h5>
-            ${contractor.address.split(' | ').map(address => `<p>${address}</p>`).join('')}
+            ${contractor.address ? contractor.address.split(' | ').map(address => `<p>${address}</p>`).join('') : '---'}
             <h5>Телефон:</h5>
-            ${contractor.phone_number.split(' | ').map(phone_number => `<p>${phone_number}</p>`).join('')}
+            ${contractor.phone_number ? contractor.phone_number.split(' | ').map(phone_number => `<p>${phone_number}</p>`).join('') : '---'}
         <div/>` : ''
 
     let html = `<div>

@@ -28,10 +28,14 @@ export const contractorsSlice = createSlice({
         contractorList: [],
         error: null,
     },
-    reducers: {},
+    reducers: {
+        editContractorList(state, action){
+            state.contractorList = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchContractors.fulfilled, (state, action) => {
-            state.contractorList = action.payload
+            state.contractorList = action.payload.results
         });
         builder.addCase(fetchContractors.rejected, (state, {payload}) => {
             state.error = payload
@@ -39,4 +43,5 @@ export const contractorsSlice = createSlice({
     },
 })
 
+export const {editContractorList} = contractorsSlice.actions
 export default contractorsSlice.reducer

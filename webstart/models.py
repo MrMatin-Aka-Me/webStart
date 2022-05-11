@@ -74,8 +74,8 @@ class Price(models.Model):
                             on_delete=models.CASCADE)
     site_type = models.ForeignKey('SiteType', verbose_name='Относится к типу сайта', related_name='price',
                             on_delete=models.CASCADE)
-    min_price = models.CharField(max_length=16, verbose_name='Минимальная цена', blank=True, null=True)
-    max_price = models.CharField(max_length=16, verbose_name='Максимальная цена', blank=True, null=True)
+    min_price = models.IntegerField(verbose_name='Минимальная цена', blank=True, null=True)
+    max_price = models.IntegerField(verbose_name='Максимальная цена', blank=True, null=True)
 
     def __str__(self):
         return '{} {} Минимальная цена: {} Максимальная цена: {}'.format(self.obj.name, self.site_type.type, self.min_price, self.max_price)
