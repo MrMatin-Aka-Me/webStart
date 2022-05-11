@@ -31,8 +31,8 @@ class Contractor(models.Model):
 
     obj = models.OneToOneField('Object', verbose_name='Относится к объекту',
                             on_delete=models.CASCADE, primary_key=True)
-    phone_number = models.CharField(max_length=16, verbose_name='Телефон', blank=True, null=True)
-    address = models.CharField(max_length=300, verbose_name='Адрес', blank=True, null=True)
+    phone_number = models.CharField(max_length=70, verbose_name='Телефон', blank=True, null=True)
+    address = models.CharField(max_length=500, verbose_name='Адрес', blank=True, null=True)
     projects = models.ManyToManyField('SiteType', verbose_name='Типы сайтов', blank=True)
     logo = models.ImageField(blank=True, upload_to='web_studio_logos', default='')
 

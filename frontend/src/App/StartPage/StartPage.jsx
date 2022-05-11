@@ -43,10 +43,10 @@ const StartPage = () => {
         }
     }
 
-    const getPrices = async () => {
+    const getPrices = async (value) => {
 
         try {
-            const elements = await axio.get(`/api/prices/?site_type=${filterSiteType.value}`, {
+            const elements = await axio.get(`/api/prices/?site_type=${value}`, {
                 auth: {
                     username: 'admin',
                     password: 'admin'
@@ -61,7 +61,7 @@ const StartPage = () => {
     React.useEffect(() => {
         let p0 = dispatch(fetchContractors({query_str: query, page: 1}))
         let p1 = getSiteTypes()
-        let p2 = getPrices()
+        let p2 = getPrices(filterSiteType.value)
         Promise.all([p0, p1, p2]).then(data => {
             data[1] && setSiteTypes(data[1].map(el => ({
                 value: el.id,
@@ -83,10 +83,12 @@ const StartPage = () => {
         let siteType = filterName === 'siteType' ? 'projects=' + filterObj.value : 'projects=' + filterSiteType.value
         let contractorType = filterName === 'contractorType' ? 'obj__obj_type=' + filterObj.value : 'obj__obj_type=' + filterContractorType.value
         let str = contractorType + '&' + siteType
+        console.log(str)
         setQuery(str)
         let p0 = dispatch(fetchContractors({query_str: str, page: 1}))
-        let p1 = getPrices()
+        let p1 = filterName === 'siteType' ? getPrices(filterObj.value) : getPrices(filterSiteType.value)
         Promise.all([p0, p1]).then(data => {
+            console.log('data[1]', data[1])
             setPricesObj(createPriceObj(data[1]))
             setLoading(false)
         })
