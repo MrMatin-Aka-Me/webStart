@@ -35,7 +35,7 @@ export const contractorsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchContractors.fulfilled, (state, action) => {
-            state.contractorList = action.payload.results
+            state.contractorList = action.payload
         });
         builder.addCase(fetchContractors.rejected, (state, {payload}) => {
             state.error = payload

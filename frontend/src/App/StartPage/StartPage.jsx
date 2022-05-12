@@ -61,12 +61,10 @@ const StartPage = () => {
         }
     }
 
-    const getPrices = async (site_type, min_price = 0, max_price = 1000000000) => {
-
-        console.log(min_price, max_price)
+    const getPrices = async (site_type) => {
 
         try {
-            const elements = await axio.get(`/api/prices/?site_type=${site_type}&min_price=${min_price}&max_price=${max_price}`, {
+            const elements = await axio.get(`/api/prices/?site_type=${site_type}`, {
                 auth: {
                     username: 'admin',
                     password: 'admin'
@@ -91,25 +89,38 @@ const StartPage = () => {
                 value: '',
                 label: 'Все'
             }, ...Object.keys(contractorTypesObj).map(key => ({value: key, label: contractorTypesObj[key]}))])
-            return data[2]
-        }).then(prices => {
-            setPricesObj(createPriceObj(prices))
+
+            const obj = createPriceObj(data[2])
+            filterByPriceRange(data[0].payload, obj, priceRangeValue[filterPriceRange.value][0], priceRangeValue[filterPriceRange.value][1])
+            setPricesObj(obj)
+
+        }).finally(() => {
             setLoading(false)
         })
     }, [])
 
     const handleFilterChange = (filterName, filterObj) => {
         setLoading(true)
+
         let siteType = filterName === 'siteType' ? 'projects=' + filterObj.value : 'projects=' + filterSiteType.value
         let contractorType = filterName === 'contractorType' ? 'obj__obj_type=' + filterObj.value : 'obj__obj_type=' + filterContractorType.value
         let str = contractorType + '&' + siteType
         console.log(str)
         setQuery(str)
+
+        let priceRangeMin = filterName === 'priceRange' ? priceRangeValue[filterObj.value][0] : priceRangeValue[filterPriceRange.value][0]
+        let priceRangeMax = filterName === 'priceRange' ? priceRangeValue[filterObj.value][1] : priceRangeValue[filterPriceRange.value][1]
+
         let p0 = dispatch(fetchContractors({query_str: str, page: 1}))
         let p1 = filterName === 'siteType' ? getPrices(filterObj.value) : getPrices(filterSiteType.value)
         Promise.all([p0, p1]).then(data => {
             console.log('data[1]', data[1])
-            setPricesObj(createPriceObj(data[1]))
+            console.log('data[0]', data[0])
+
+            const obj = createPriceObj(data[1])
+            filterByPriceRange(data[0].payload, obj, priceRangeMin, priceRangeMax)
+            setPricesObj(obj)
+
             setLoading(false)
         })
     }
@@ -133,28 +144,28 @@ const StartPage = () => {
         });
     }
 
-    const handlePriceRangeFilterChange = (filterObj) => {
+    const filterByPriceRange = (contList, pricesObj, minPrice, maxPrice) => {
 
-        getPrices(filterSiteType.value, priceRangeValue[filterObj.value][0], priceRangeValue[filterObj.value][1]).then(prices => {
-            console.log(prices)
+        const filteredList = []
+
+        const contractorTmpObj = {}
+        contList.results.forEach(item => {
+            contractorTmpObj[item.obj.id] = item
+            if (!pricesObj[item.obj.id]){
+                filteredList.push(item)
+            }
         })
 
-        // const contractorTmpObj = {}
-        // contractorList.forEach(item => {
-        //     contractorTmpObj[item.obj.id] = item
-        // })
-        //
-        // const filteredList = []
-        // Object.keys(pricesObj).forEach(key => {
-        //     if (pricesObj[key][0] >= priceRangeValue[filterObj.value][0] && pricesObj[key][1] <= priceRangeValue[filterObj.value][1]) {
-        //         filteredList.push(contractorTmpObj[key])
-        //     }
-        // })
-        //
-        // dispatch(editContractorList(filteredList))
+        Object.keys(pricesObj).forEach(key => {
+            if ((pricesObj[key][0] >= minPrice && pricesObj[key][0] <= maxPrice) || (pricesObj[key][1] <= maxPrice && pricesObj[key][1] >= minPrice)) {
+                filteredList.push(contractorTmpObj[key])
+            }
+        })
+
+        dispatch(editContractorList({...contList, results: filteredList, count: filteredList.length}))
     }
 
-    // console.log('contractorList ', contractorList)
+    console.log('contractorList ', contractorList)
 
     return (
         <>
@@ -207,7 +218,7 @@ const StartPage = () => {
                                                 value={filterPriceRange}
                                                 onChange={(filterObj) => {
                                                     setFilterPriceRange(filterObj)
-                                                    handlePriceRangeFilterChange(filterObj)
+                                                    handleFilterChange('priceRange', filterObj)
                                                 }}
                                                 placeholder={''}
                                             // styles={colourStyles}
@@ -232,7 +243,7 @@ const StartPage = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        {contractorList && contractorList.map(contractor => {
+                        {contractorList && contractorList.results && contractorList.results.map(contractor => {
                             return contractor ? <tr key={uuidv4()} className={'custom-table-row'}
                                        onClick={(e) => {
                                            if (e.target.name === 'link') return;

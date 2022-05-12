@@ -27,8 +27,8 @@ class SiteTypeFilter(filters.FilterSet):
 class PriceFilter(filters.FilterSet):
 
 
-    max_price = filters.NumberFilter(field_name='min_price', lookup_expr="lte")
-    min_price = filters.NumberFilter(field_name='min_price', lookup_expr="gte")
+    # max_price = filters.NumberFilter(field_name='min_price', lookup_expr="lte")
+    # min_price = filters.NumberFilter(field_name='min_price', lookup_expr="gte")
 
    #  ||
 
