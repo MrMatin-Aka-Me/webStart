@@ -6,6 +6,7 @@ import {Provider} from "react-redux";
 import {Routes, Route, HashRouter} from "react-router-dom";
 import StartPage from "./StartPage/StartPage";
 import store from "store/store";
+import SiteCreating from "./SiteCreating/SiteCreating";
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
             <HashRouter>
                 <Routes>
                     <Route exact path={"/"} element={<StartPage/>}/>
+                    <Route path={"/site-creating"} element={<SiteCreating/>}/>
                 </Routes>
             </HashRouter>
         </Provider>

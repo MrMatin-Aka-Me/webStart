@@ -23,7 +23,7 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <div className="navbar-nav">
-                        <Link to={''} className="nav-item nav-link link">Как создать сайт</Link>
+                        <Link to={'/site-creating'} className="nav-item nav-link link">Как создать сайт</Link>
                     </div>
                     <div className="navbar-nav ms-auto">
                         <a href="https://github.com/MrMatin-Aka-Me" target={'_blank'} className="btn btn-dark px-3"><i className="bi-github"/></a>
