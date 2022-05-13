@@ -9,10 +9,7 @@ export const fetchContractors = createAsyncThunk(
 
         try {
             const elements = await axio.get(url, {
-                auth:{
-                    username: 'admin',
-                    password: 'admin'
-                }
+                headers: {withCredentials: true}
             });
             return elements.data
         } catch (err) {

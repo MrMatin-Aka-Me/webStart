@@ -50,10 +50,7 @@ const StartPage = () => {
     const getSiteTypes = async () => {
         try {
             const elements = await axio.get(`/api/site-types/`, {
-                auth: {
-                    username: 'admin',
-                    password: 'admin'
-                }
+                headers: {withCredentials: true}
             });
             return elements.data
         } catch (err) {
@@ -65,10 +62,7 @@ const StartPage = () => {
 
         try {
             const elements = await axio.get(`/api/prices/?site_type=${site_type}`, {
-                auth: {
-                    username: 'admin',
-                    password: 'admin'
-                }
+                headers: {withCredentials: true}
             });
             return elements.data
         } catch (err) {
