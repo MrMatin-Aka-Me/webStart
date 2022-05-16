@@ -165,107 +165,109 @@ const StartPage = () => {
         <>
             <div className={'body-background'}/>
             <Header/>
-            <div className={'container'}>
-                <div className="row mb-2">
-                    <div className="col-12">
-                        <div className="page-title-box">
-                            <h4 className="page-title">
-                                Поиск вариантов для заказа сайта
-                            </h4>
+            <div className="container-fluid">
+                <div className={'container'}>
+                    <div className="row mb-2">
+                        <div className="col-12">
+                            <div className="page-title-box">
+                                <h4 className="page-title">
+                                    Поиск вариантов для заказа сайта
+                                </h4>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="col-xl-12 shadow-sm rounded">
-                    <div className="card">
-                        <form className="card-body">
-                            <h5 className="text-center mb-4">Укажите фильтры для поиска</h5>
-                            <div className="row justify-content-center">
-                                <div style={{width: '90%'}} className={'row justify-content-between'}>
-                                    <div className="col-lg-4 mb-3">
-                                        <p className="mb-0">Выберите тип сайта:</p>
-                                        <Select options={siteTypes}
-                                                value={filterSiteType}
-                                                onChange={(filterObj) => {
-                                                    setFilterSiteType(filterObj)
-                                                    handleFilterChange('siteType', filterObj)
-                                                }}
-                                                placeholder={''}
-                                            // styles={colourStyles}
-                                        />
-                                    </div>
-                                    <div className="col-lg-4 mb-3">
-                                        <p className="mb-0">Выберите тип подрядчика:</p>
-                                        <Select options={contractorTypes}
-                                                value={filterContractorType}
-                                                onChange={(filterObj) => {
-                                                    setFilterContractorType(filterObj)
-                                                    handleFilterChange('contractorType', filterObj)
-                                                }}
-                                                placeholder={''}
-                                            // styles={colourStyles}
-                                        />
-                                    </div>
-                                    <div className="col-lg-4 mb-3">
-                                        <p className="mb-0">Выберите ценовой диапазон:</p>
-                                        <Select options={priceRanges}
-                                                value={filterPriceRange}
-                                                onChange={(filterObj) => {
-                                                    setFilterPriceRange(filterObj)
-                                                    handleFilterChange('priceRange', filterObj)
-                                                }}
-                                                placeholder={''}
-                                            // styles={colourStyles}
-                                        />
+                    <div className="col-xl-12 shadow-sm rounded">
+                        <div className="card">
+                            <form className="card-body">
+                                <h5 className="text-center mb-4">Укажите фильтры для поиска</h5>
+                                <div className="row justify-content-center">
+                                    <div style={{width: '90%'}} className={'row justify-content-between'}>
+                                        <div className="col-lg-4 mb-3">
+                                            <p className="mb-0">Выберите тип сайта:</p>
+                                            <Select options={siteTypes}
+                                                    value={filterSiteType}
+                                                    onChange={(filterObj) => {
+                                                        setFilterSiteType(filterObj)
+                                                        handleFilterChange('siteType', filterObj)
+                                                    }}
+                                                    placeholder={''}
+                                                // styles={colourStyles}
+                                            />
+                                        </div>
+                                        <div className="col-lg-4 mb-3">
+                                            <p className="mb-0">Выберите тип подрядчика:</p>
+                                            <Select options={contractorTypes}
+                                                    value={filterContractorType}
+                                                    onChange={(filterObj) => {
+                                                        setFilterContractorType(filterObj)
+                                                        handleFilterChange('contractorType', filterObj)
+                                                    }}
+                                                    placeholder={''}
+                                                // styles={colourStyles}
+                                            />
+                                        </div>
+                                        <div className="col-lg-4 mb-3">
+                                            <p className="mb-0">Выберите ценовой диапазон:</p>
+                                            <Select options={priceRanges}
+                                                    value={filterPriceRange}
+                                                    onChange={(filterObj) => {
+                                                        setFilterPriceRange(filterObj)
+                                                        handleFilterChange('priceRange', filterObj)
+                                                    }}
+                                                    placeholder={''}
+                                                // styles={colourStyles}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                        {/*// <!-- end card-body-->*/}
+                            </form>
+                            {/*// <!-- end card-body-->*/}
+                        </div>
+                        {/*// <!-- end card-->*/}
                     </div>
-                    {/*// <!-- end card-->*/}
-                </div>
-                <div className="col-xl-12 shadow rounded">
-                    <table className={"table align-middle mb-0 mt-3 " + (loading ? 'loading' : 'bg-white')}>
-                        <thead className="bg-light">
-                        <tr>
-                            <th/>
-                            <th>Название</th>
-                            <th>Мин. цена (руб.)</th>
-                            <th>Макс. цена (руб.)</th>
-                            <th>Тип подрядчика</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {contractorList && contractorList.results && contractorList.results.map(contractor => {
-                            return contractor ? <tr key={uuidv4()} className={'custom-table-row'}
-                                       onClick={(e) => {
-                                           if (e.target.name === 'link') return;
-                                           showSmallInfo(contractor)
-                                       }}
-                            >
-                                <td width={'30px'}>
-                                    {contractor.logo && <img src={contractor.logo} width={'24px'} height={'24px'}
-                                         alt={contractor.obj.name + '_logo'}/>}
-                                </td>
-                                <td>
-                                    <a target="_blank" href={contractor.obj.link}
-                                       name={'link'}
-                                       className={'link'}
-                                    >{contractor.obj.name}</a>
-                                </td>
-                                <td>
-                                    {pricesObj && pricesObj[contractor.obj.id] ? reformatPrice(pricesObj[contractor.obj.id][0]): '-'}
-                                </td>
-                                <td>
-                                    {pricesObj && pricesObj[contractor.obj.id] ? reformatPrice(pricesObj[contractor.obj.id][1]) : '-'}
-                                </td>
-                                <td>{contractorTypesObj[contractor.obj.obj_type]}</td>
-                            </tr> : null
-                        })
-                        }
-                        </tbody>
-                    </table>
+                    <div className="col-xl-12 shadow rounded">
+                        <table className={"table align-middle mb-0 mt-3 " + (loading ? 'loading' : 'bg-white')}>
+                            <thead className="bg-light">
+                            <tr>
+                                <th/>
+                                <th>Название</th>
+                                <th>Мин. цена (руб.)</th>
+                                <th>Макс. цена (руб.)</th>
+                                <th>Тип подрядчика</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {contractorList && contractorList.results && contractorList.results.map(contractor => {
+                                return contractor ? <tr key={uuidv4()} className={'custom-table-row'}
+                                           onClick={(e) => {
+                                               if (e.target.name === 'link') return;
+                                               showSmallInfo(contractor)
+                                           }}
+                                >
+                                    <td width={'30px'}>
+                                        {contractor.logo && <img src={contractor.logo} width={'24px'} height={'24px'}
+                                             alt={contractor.obj.name + '_logo'}/>}
+                                    </td>
+                                    <td>
+                                        <a target="_blank" href={contractor.obj.link}
+                                           name={'link'}
+                                           className={'link'}
+                                        ><strong>{contractor.obj.name}</strong></a>
+                                    </td>
+                                    <td>
+                                        {pricesObj && pricesObj[contractor.obj.id] ? reformatPrice(pricesObj[contractor.obj.id][0]): '-'}
+                                    </td>
+                                    <td>
+                                        {pricesObj && pricesObj[contractor.obj.id] ? reformatPrice(pricesObj[contractor.obj.id][1]) : '-'}
+                                    </td>
+                                    <td>{contractorTypesObj[contractor.obj.obj_type]}</td>
+                                </tr> : null
+                            })
+                            }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </>

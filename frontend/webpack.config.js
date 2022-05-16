@@ -19,10 +19,12 @@ module.exports = {
         'app': './src/index',
     },
     output: {
-        path: path.resolve('../static/assets/bundles_react/'),
+        path: path.resolve('../static_files/assets/bundles_react/'),
         filename: "[name]-[fullhash].js",
-        publicPath: "/static/assets/bundles_react/",
+        publicPath: "/static_files/assets/bundles_react/",
 
+        //dev-server
+        // publicPath: '/',
     },
     plugins: [
         new BundleTracker({filename: './webpack-stats.json'}),
@@ -30,7 +32,7 @@ module.exports = {
         new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
             inject: true,
-            // template: path.join(__dirname, 'public/react.html')
+            // template: path.join(__dirname, 'public/index.html')
         }),
         new ProvidePlugin({
         jQuery: 'jquery',
