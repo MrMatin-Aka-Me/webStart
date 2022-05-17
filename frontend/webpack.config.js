@@ -19,9 +19,9 @@ module.exports = {
         'app': './src/index',
     },
     output: {
-        path: path.resolve('../static_files/assets/bundles_react/'),
+        path: path.resolve('../static/assets/bundles_react/'),
         filename: "[name]-[fullhash].js",
-        publicPath: "/static_files/assets/bundles_react/",
+        publicPath: "/static/assets/bundles_react/",
 
         //dev-server
         // publicPath: '/',

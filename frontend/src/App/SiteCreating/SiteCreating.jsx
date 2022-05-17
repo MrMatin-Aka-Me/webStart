@@ -46,8 +46,7 @@ const SiteCreating = () => {
                         <div className="col-md-9">
                             <div className="card shadow">
                                 <div className="card-body">
-                                    <h3 className="border-bot-green mt-0">Информация</h3>
-                                    {componentsToShow[showedComponentId]}
+                                    <h3 className="border-bot-green mt-0">{componentsToShow[showedComponentId]}</h3>
                                 </div>
                             </div>
                         </div>

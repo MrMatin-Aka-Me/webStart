@@ -25,9 +25,8 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <div className="navbar-nav">
                         <Link to={'/site-creating'} className="nav-item nav-link link">Как создать сайт</Link>
-                        <Link to={'/'} className="nav-item nav-link link">Конструкторы</Link>
-                        <Link to={'/'} className="nav-item nav-link link">Хостинги</Link>
-                        <Link to={'/'} className="nav-item nav-link link">Курсы</Link>
+                        <Link to={'/tools'} className="nav-item nav-link link">Инструменты</Link>
+                        <Link to={'/'} className="nav-item nav-link link">Сравнение</Link>
                     </div>
                     <div className="navbar-nav ms-auto">
                         <a href="https://github.com/MrMatin-Aka-Me" target={'_blank'} className="btn btn-dark px-3"><i className="bi-github"/></a>
