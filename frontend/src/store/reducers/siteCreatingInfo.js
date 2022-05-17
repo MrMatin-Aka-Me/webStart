@@ -1,10 +1,12 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-
+import {createSlice} from '@reduxjs/toolkit';
+import SiteCreatingStages from "../../App/SiteCreating/SiteCreatingStages/SiteCreatingStages";
+import ConstructorSiteCreating from "../../App/SiteCreating/ConstructorSiteCreating/ConstructorSiteCreating";
+import CMSSiteCreating from "../../App/SiteCreating/CMSSiteCreating/CMSSiteCreating";
 
 const componentsToShow = {
-    1: 'alo',
-    2: 'blabla',
-    3: 'xaxaxa'
+    1: SiteCreatingStages(),
+    2: ConstructorSiteCreating(),
+    3: CMSSiteCreating()
 }
 
 export const siteCreatingInfoSlice = createSlice({

@@ -72,6 +72,7 @@
   "dependencies": {
     "antd": "^4.19.1",
     "bootstrap-icons": "^1.8.1",
+    "react-router-hash-link": "^2.4.3",
     "sweetalert2": "^11.4.13"
   }
 }
