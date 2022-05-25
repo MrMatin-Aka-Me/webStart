@@ -28887,9 +28887,31 @@ div.ant-typography-edit-content.ant-typography-rtl {
   margin: 8px 0 0;
   padding: 0;
 }
-/*!*******************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/App/StartPage/style.css ***!
-  \*******************************************************************************/
+/*!**********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/App/SiteCreating/style.css ***!
+  \**********************************************************************************/
+ul {
+    list-style-type: none;
+}
+/*!**************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/accordionItem/AccordionItem.css ***!
+  \**************************************************************************************************/
+.accordion-item > .accordion-header > button:not(.collapsed){
+    color: black;
+    background: rgb(193, 233, 255) radial-gradient(circle, rgba(193, 233, 255, 0.3) 18%, rgba(209, 193, 255, 0.3) 100%);
+}
+
+.btn-rm-focus-border:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+ul {
+    list-style-type: none;
+}
+/*!*********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/App/Contractors/style.css ***!
+  \*********************************************************************************/
 * {
     font-size: 17px;
 }
@@ -28951,26 +28973,4 @@ div.ant-typography-edit-content.ant-typography-rtl {
   \***********************************************************************/
 .swalHtmlContainer{
     text-align: start;
-}
-/*!**********************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/App/SiteCreating/style.css ***!
-  \**********************************************************************************/
-ul {
-    list-style-type: none;
-}
-/*!**************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/components/accordionItem/AccordionItem.css ***!
-  \**************************************************************************************************/
-.accordion-item > .accordion-header > button:not(.collapsed){
-    color: black;
-    background: rgb(193, 233, 255) radial-gradient(circle, rgba(193, 233, 255, 0.3) 18%, rgba(209, 193, 255, 0.3) 100%);
-}
-
-.btn-rm-focus-border:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-ul {
-    list-style-type: none;
 }

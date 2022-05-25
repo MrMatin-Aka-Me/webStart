@@ -9,7 +9,7 @@ import './style.css'
 import {showSmallInfo} from 'utils/utils';
 import Loader from "components/loader/Loader";
 
-const StartPage = () => {
+const Contractors = () => {
 
     let contractorTypesObj = {
         'web_studio': 'Веб-студия',
@@ -274,4 +274,4 @@ const StartPage = () => {
     );
 };
 
-export default StartPage;
+export default Contractors;

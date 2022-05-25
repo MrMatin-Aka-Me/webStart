@@ -3,9 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework.authentication import BasicAuthentication
 
-from api.filters import ContractorFilter, ObjectFilter, SiteTypeFilter, PriceFilter
-from api.serializers import ContractorSerializer, ObjectSerializer, SiteTypeSerializer, PriceSerializer
-from webstart.models import Contractor, Object, SiteType, Price
+from api.filters import ContractorFilter, ObjectFilter, SiteTypeFilter, PriceFilter, ToolFilter, ConstructorFilter, \
+    TargetFilter
+from api.serializers import ContractorSerializer, ObjectSerializer, SiteTypeSerializer, PriceSerializer, ToolSerializer, \
+    ConstructorSerializer, TargetSerializer
+from webstart.models import Contractor, Object, SiteType, Price, Constructor, Tool, Target
 from rest_framework import viewsets
 
 
@@ -34,3 +36,23 @@ class PriceViewSet(viewsets.ModelViewSet):
     filter_class = PriceFilter
     model = Price
     pagination_class = None
+
+class ToolViewSet(viewsets.ModelViewSet):
+    queryset = Tool.objects.all().order_by('id')
+    serializer_class = ToolSerializer
+    filter_class = ToolFilter
+    model = Tool
+
+class TargetViewSet(viewsets.ModelViewSet):
+    queryset = Target.objects.all().order_by('id')
+    serializer_class = TargetSerializer
+    filter_class = TargetFilter
+    model = Target
+    pagination_class = None
+
+class ConstructorViewSet(viewsets.ModelViewSet):
+    queryset = Constructor.objects.all().order_by('tool_id')
+    serializer_class = ConstructorSerializer
+    filter_class = ConstructorFilter
+    model = Constructor
+

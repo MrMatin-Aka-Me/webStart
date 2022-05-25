@@ -1,4 +1,4 @@
-from webstart.models import Contractor, Object, SiteType, Price
+from webstart.models import Contractor, Object, SiteType, Price, Tool, Constructor, Target
 from rest_framework import serializers
 
 
@@ -13,6 +13,7 @@ class SiteTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = SiteType
         fields = '__all__'
+        depth = 1
 
 class PriceSerializer(serializers.ModelSerializer):
 
@@ -27,3 +28,23 @@ class ContractorSerializer(serializers.ModelSerializer):
         model = Contractor
         fields = ('phone_number', 'address', 'projects', 'obj', 'logo')
 
+class ToolSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tool
+        fields = '__all__'
+        depth = 1
+
+class ConstructorSerializer(serializers.ModelSerializer):
+    tool = ToolSerializer(required=False, read_only=True)
+
+    class Meta:
+        model = Constructor
+        fields = '__all__'
+        depth = 1
+
+class TargetSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Target
+        fields = '__all__'

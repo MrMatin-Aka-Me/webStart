@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from webstart.models import Contractor, Object, SiteType, Price
+from webstart.models import Contractor, Object, SiteType, Price, Tool, Constructor, Target
 from django.db.models import Q
 
 
@@ -37,5 +37,23 @@ class PriceFilter(filters.FilterSet):
 
     class Meta:
         model = Price
+        fields = '__all__'
+
+class ToolFilter(filters.FilterSet):
+
+   class Meta:
+       model = Tool
+       fields = '__all__'
+       exclude = ['logo']
+
+class ConstructorFilter(filters.FilterSet):
+
+   class Meta:
+       model = Constructor
+       fields = '__all__'
+
+class TargetFilter(filters.FilterSet):
+    class Meta:
+        model = Target
         fields = '__all__'
 
