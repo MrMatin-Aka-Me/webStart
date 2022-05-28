@@ -48,7 +48,8 @@ const Header = ({activeTab}) => {
                         </li>
                     </ul>
                     <div className="navbar-nav ms-auto">
-                        <a href="https://github.com/MrMatin-Aka-Me" target={'_blank'} className="btn btn-dark px-3"><i className="bi-github"/></a>
+                        <a href="/admin" className="btn btn-dark px-3">Войти как админ</a>
+                        {/*<a href="https://github.com/MrMatin-Aka-Me" target={'_blank'} className="btn btn-dark px-3"><i className="bi-github"/></a>*/}
                     </div>
                 </div>
 

@@ -143,9 +143,11 @@ const Contractors = () => {
         return (priceInt).toLocaleString('ru-RU', {
           // style: 'currency',
           // currency: 'RUB',
-          maximumSignificantDigits: 1
+          // maximumSignificantDigits: 1
         });
     }
+
+    console.log('pricesObj:', pricesObj)
 
     const filterByPriceRange = (contList, pricesObj, minPrice, maxPrice) => {
 

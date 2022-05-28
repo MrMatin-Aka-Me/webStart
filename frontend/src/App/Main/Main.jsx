@@ -12,7 +12,7 @@ const Main = () => {
     const navigate = useNavigate()
 
     const [targetSelectOptions, setTargetSelectOptions] = useState([])
-    const [targetSelectValue, setTargetSelectValue] = useState(null)
+    const [targetSelectValue, setTargetSelectValue] = useState([])
 
     const [siteTypeSelectValue, setSiteTypeSelectValue] = useState(null)
     const [siteTypeOptions, setSiteTypeOptions] = useState([])
@@ -37,9 +37,9 @@ const Main = () => {
         }
     }
 
-    const getSiteTypes = async (targetId) => {
+    const getSiteTypes = async (targetIds) => {
         try {
-            const elements = await axio.get(`/api/site-types/?for_targets=${targetId}`, {
+            const elements = await axio.get(`/api/site-types/?for_targets__in=${targetIds}`, {
                 headers: {withCredentials: true}
             });
             return elements.data
@@ -89,8 +89,14 @@ const Main = () => {
     }, [])
 
 
-    const handleOnTargetSelect = (target) => {
-        getSiteTypes(target.value).then( data => {
+    const handleOnTargetSelect = (targets) => {
+
+        if(targets.length === 0){
+            setSiteTypeOptions([])
+            return
+        }
+
+        getSiteTypes(targets.map(trgt => trgt.value).join(',')).then( data => {
             setSiteTypesArray(data)
             setSiteTypeOptions(data.map(el => ({value: el.id, label: el.type})))
         })
@@ -145,12 +151,14 @@ const Main = () => {
                                             <p className="mb-0">Цель:</p>
                                             <Select options={targetSelectOptions}
                                                     value={targetSelectValue}
-                                                    onChange={(target) => {
-                                                        setTargetSelectValue(target)
+                                                    onChange={(targets) => {
+                                                        console.log(targets)
+                                                        setTargetSelectValue(targets)
                                                         setSiteTypeSelectValue(null)
-                                                        handleOnTargetSelect(target)
+                                                        handleOnTargetSelect(targets)
                                                     }}
                                                     placeholder={''}
+                                                    isMulti
                                                 // styles={colourStyles}
                                             />
                                         </div>
@@ -160,7 +168,7 @@ const Main = () => {
                                                     value={siteTypeSelectValue}
                                                     onChange={setSiteTypeSelectValue}
                                                     placeholder={''}
-                                                    noOptionsMessage={() => !targetSelectValue ? 'Сначала выберите цель' : 'Результат не найден'}
+                                                    noOptionsMessage={() => targetSelectValue.length === 0 ? 'Сначала выберите цель' : 'Результат не найден'}
                                                 // styles={colourStyles}
                                             />
                                         </div>
@@ -185,7 +193,7 @@ const Main = () => {
                         {/*// <!-- end card-->*/}
                     </div>
 
-                    {!targetSelectValue && !siteTypeSelectValue && <div>
+                    {targetSelectValue.length === 0 && !siteTypeSelectValue && <div>
                         <div className="row mb-2 mt-4">
                             <div className="col-12">
                                 <div className="page-title-box">
@@ -199,9 +207,9 @@ const Main = () => {
                         <div className={'row mt-3 shadow rounded align-items-center p-3 d-flex'} style={{backgroundColor: 'white'}}>
                                     <div className={'col-3'}><img src={target_image} alt="logo" width={'250px'} height={'250px'}/></div>
                                     <div className={'col-9'}>
-                                        <h4>1. Выбор цели</h4>
+                                        <h4>1. Выбор целей</h4>
                                         <div>
-                                            <div>Цель выбирается из выпадающего списка "Цель" в блоке "Укажите критерии"</div>
+                                            <div>Цели выбирается из выпадающего списка "Цель" в блоке "Укажите критерии"</div>
                                             <div>Цели бывают коммерческие и некоммерческие. В выпадающем списке вы увидете это разделение</div>
                                         </div>
                                     </div>
@@ -212,7 +220,7 @@ const Main = () => {
                                     <div className={'col-9'}>
                                         <h4>2. Выбор вида сайта</h4>
                                         <div>
-                                            <div>После выбора цели выпадающий список "Вид сайта" заполняется рекомендуемыми видами сайтов, которые подходят для выбранной цели</div>
+                                            <div>После выбора целей выпадающий список "Вид сайта" заполняется рекомендуемыми видами сайтов, которые подходят для выбранных целей</div>
                                             <div>Также появляется информация о каждом из них под блоком "Укажите критерии"</div>
                                         </div>
                                     </div>
@@ -265,7 +273,7 @@ const Main = () => {
 
                     </div>}
 
-                    {targetSelectValue && !siteTypeSelectValue && <div>
+                    {targetSelectValue.length !== 0 && !siteTypeSelectValue && <div>
                         <div className="row mb-2 mt-4">
                             <div className="col-12">
                                 <div className="page-title-box">
@@ -289,7 +297,7 @@ const Main = () => {
                             </div>})}
                      </div>}
 
-                    {targetSelectValue && siteTypeSelectValue && !inplementationWaySelectValue && <div>
+                    {targetSelectValue.length !== 0 && siteTypeSelectValue && !inplementationWaySelectValue && <div>
                         <div className="row mb-2 mt-4">
                             <div className="col-12">
                                 <div className="page-title-box">

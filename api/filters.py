@@ -17,9 +17,14 @@ class ObjectFilter(filters.FilterSet):
        model = Object
        fields = '__all__'
 
+class NumberInFilter(filters.BaseInFilter, filters.NumberFilter):
+    pass
+
 class SiteTypeFilter(filters.FilterSet):
 
-   class Meta:
+    for_targets__in = NumberInFilter(field_name="for_targets", lookup_expr="in", distinct=True)
+
+    class Meta:
        model = SiteType
        fields = '__all__'
 
@@ -46,8 +51,6 @@ class ToolFilter(filters.FilterSet):
        fields = '__all__'
        exclude = ['logo']
 
-# class NumberInFilter(filters.BaseInFilter, filters.NumberFilter):
-#     pass
 
 class ConstructorFilter(filters.FilterSet):
     # site_types = NumberInFilter(field_name="site_types", lookup_expr="in")

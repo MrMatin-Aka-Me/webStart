@@ -122,6 +122,11 @@ class Constructor(models.Model):
     tool = models.OneToOneField('Tool', verbose_name='Относится к иснтрументу',
                             on_delete=models.CASCADE, primary_key=True)
     has_free = models.BooleanField(verbose_name='Имеет бесплатный тариф', default=False)
+    has_seo_setting_master = models.BooleanField(verbose_name='Есть мастер для настройки SEO', default=False)
+    has_mobile_version_editor = models.BooleanField(verbose_name='Есть редактор мобильной версии сайта', default=False)
+    is_all_templates_responsive = models.BooleanField(verbose_name='Все шаблоны адаптивны', default=False)
+    auto_sitemap_and_robots = models.BooleanField(verbose_name='Автоматически формируются Sitemap и Robots', default=False)
+    has_free_ssl_certificate = models.BooleanField(verbose_name='Бесплатный SSL сертификат', default=False)
     free_period = models.CharField(max_length=100, verbose_name='Бесплатный период', blank=True, null=True)
     min_price_for_month = models.IntegerField(verbose_name='Минимальная цена за месяц', blank=True, null=True)
     max_price_for_month = models.IntegerField(verbose_name='Максимальная цена за месяц', blank=True, null=True)
