@@ -1,4 +1,4 @@
-from webstart.models import Contractor, Object, SiteType, Price, Tool, Constructor, Target
+from webstart.models import Contractor, Object, SiteType, Price, Tool, Constructor, Target, ImplementationWay
 from rest_framework import serializers
 
 
@@ -47,4 +47,10 @@ class TargetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Target
+        fields = '__all__'
+
+class ImplementationWaySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ImplementationWay
         fields = '__all__'

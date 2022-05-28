@@ -5,6 +5,6 @@ import siteCreatingInfoReducer from './reducers/siteCreatingInfo'
 export default configureStore({
     reducer: {
         contractor: contractorReducer,
-        siteCreatingInfo: siteCreatingInfoReducer,
+        // siteCreatingInfo: siteCreatingInfoReducer,
     }
 })

@@ -7,9 +7,12 @@ import Select from "react-select";
 import axio from "axios";
 import './style.css'
 import {showSmallInfo} from 'utils/utils';
-import Loader from "components/loader/Loader";
+import {useLocation} from "react-router-dom";
 
 const Contractors = () => {
+
+    const location = useLocation()
+    const projectsFromQueryParams = new URLSearchParams(location.search).get('projects')
 
     let contractorTypesObj = {
         'web_studio': 'Веб-студия',
@@ -34,7 +37,7 @@ const Contractors = () => {
 
     const dispatch = useDispatch()
     const {contractorList} = useSelector(state => state.contractor)
-    const [query, setQuery] = React.useState('projects=1')
+    const [query, setQuery] = React.useState(projectsFromQueryParams ? `projects=${projectsFromQueryParams}` : 'projects=1')
 
     const [filterSiteType, setFilterSiteType] = React.useState({value: 1, label: 'Лендинг'})
     const [siteTypes, setSiteTypes] = React.useState([])
@@ -75,10 +78,16 @@ const Contractors = () => {
         let p1 = getSiteTypes()
         let p2 = getPrices(filterSiteType.value)
         Promise.all([p0, p1, p2]).then(data => {
-            data[1] && setSiteTypes(data[1].map(el => ({
-                value: el.id,
-                label: el.type
-            })))
+
+            const list = []
+            data[1] && data[1].forEach(el => {
+                list.push({value: el.id, label: el.type})
+                projectsFromQueryParams && +projectsFromQueryParams === el.id && setFilterSiteType({value: el.id, label: el.type})
+            })
+
+            setSiteTypes(list)
+
+
             setContractorTypes([{
                 value: '',
                 label: 'Все'
@@ -164,7 +173,7 @@ const Contractors = () => {
     return (
         <>
             <div className={'body-background'}/>
-            <Header/>
+            <Header activeTab={'orderSite'}/>
             <div className="container-fluid">
                 <div className={'container'}>
                     <div className="row mb-2">

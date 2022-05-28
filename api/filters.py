@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from webstart.models import Contractor, Object, SiteType, Price, Tool, Constructor, Target
+from webstart.models import Contractor, Object, SiteType, Price, Tool, Constructor, Target, ImplementationWay
 from django.db.models import Q
 
 
@@ -46,9 +46,15 @@ class ToolFilter(filters.FilterSet):
        fields = '__all__'
        exclude = ['logo']
 
-class ConstructorFilter(filters.FilterSet):
+# class NumberInFilter(filters.BaseInFilter, filters.NumberFilter):
+#     pass
 
-   class Meta:
+class ConstructorFilter(filters.FilterSet):
+    # site_types = NumberInFilter(field_name="site_types", lookup_expr="in")
+    template_number_min = filters.NumberFilter(field_name='template_number', lookup_expr='gte')
+    template_number_max = filters.NumberFilter(field_name='template_number', lookup_expr='lte')
+
+    class Meta:
        model = Constructor
        fields = '__all__'
 
@@ -57,3 +63,7 @@ class TargetFilter(filters.FilterSet):
         model = Target
         fields = '__all__'
 
+class ImplementationWayFilter(filters.FilterSet):
+    class Meta:
+        model = ImplementationWay
+        fields = '__all__'

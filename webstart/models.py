@@ -126,7 +126,8 @@ class Constructor(models.Model):
     min_price_for_month = models.IntegerField(verbose_name='Минимальная цена за месяц', blank=True, null=True)
     max_price_for_month = models.IntegerField(verbose_name='Максимальная цена за месяц', blank=True, null=True)
     constructor_description = models.TextField(verbose_name='Описание', blank=True, null=True)
-    site_types = models.ManyToManyField('SiteType', verbose_name='Можно реализовать', blank=True)
+    site_types = models.ManyToManyField('SiteType', verbose_name='Можно реализовать', blank=True, null=True)
+    template_number = models.IntegerField(verbose_name='Количество шаблонов', blank=True, null=True)
 
 
     def __str__(self):
@@ -149,3 +150,20 @@ class Target(models.Model):
 
     def __str__(self):
         return '{}'.format(self.target)
+
+class ImplementationWay(models.Model):
+    class Meta:
+        verbose_name = 'Способ реализации'
+        verbose_name_plural = 'Способы реализации'
+
+    TYPE_CHOICES = (
+        ('Самостоятельно', 'Самостоятельно'),
+        ('На заказ', 'На заказ'),
+    )
+
+    name = models.CharField(max_length=300, verbose_name='Способ реализации')
+    description = models.TextField(verbose_name='Описание', blank=True, null=True)
+    implementation_type = models.CharField(max_length=60, choices=TYPE_CHOICES, verbose_name='Тип', blank=True, null=True)
+
+    def __str__(self):
+        return '{}'.format(self.name)

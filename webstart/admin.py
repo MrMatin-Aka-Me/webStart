@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from webstart.models import Object, Contractor, SiteType, Price, Tool, ToolCategory, Constructor, Target
+from webstart.models import Object, Contractor, SiteType, Price, Tool, ToolCategory, Constructor, Target, \
+    ImplementationWay
 
 
 @admin.register(Object)
@@ -37,5 +38,11 @@ class ConstructorAdmin(admin.ModelAdmin):
     list_display = ['target', 'target_type']
     search_fields = ['target']
     list_filter = ['target_type']
+
+@admin.register(ImplementationWay)
+class ImplementationWayAdmin(admin.ModelAdmin):
+    list_display = ['name', 'implementation_type']
+    search_fields = ['name']
+    list_filter = ['implementation_type']
 
 admin.site.register((SiteType, ToolCategory))

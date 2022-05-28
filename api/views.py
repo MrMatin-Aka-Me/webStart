@@ -4,10 +4,10 @@ from django.shortcuts import render
 from rest_framework.authentication import BasicAuthentication
 
 from api.filters import ContractorFilter, ObjectFilter, SiteTypeFilter, PriceFilter, ToolFilter, ConstructorFilter, \
-    TargetFilter
+    TargetFilter, ImplementationWayFilter
 from api.serializers import ContractorSerializer, ObjectSerializer, SiteTypeSerializer, PriceSerializer, ToolSerializer, \
-    ConstructorSerializer, TargetSerializer
-from webstart.models import Contractor, Object, SiteType, Price, Constructor, Tool, Target
+    ConstructorSerializer, TargetSerializer, ImplementationWaySerializer
+from webstart.models import Contractor, Object, SiteType, Price, Constructor, Tool, Target, ImplementationWay
 from rest_framework import viewsets
 
 
@@ -56,3 +56,9 @@ class ConstructorViewSet(viewsets.ModelViewSet):
     filter_class = ConstructorFilter
     model = Constructor
 
+class ImplementationWayViewSet(viewsets.ModelViewSet):
+    queryset = ImplementationWay.objects.all().order_by('id')
+    serializer_class = ImplementationWaySerializer
+    filter_class = ImplementationWayFilter
+    model = ImplementationWay
+    pagination_class = None
