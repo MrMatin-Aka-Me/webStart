@@ -5,7 +5,7 @@ A Web Application that recommends types of sites and how to build them according
 1. Clone the project </br>
 2. Install Django packages from requirements.txt file. You can use this command "pip install -r requirements.txt" to install them all </br>
 3. Install node modules running "npm install" </br>
-4. Run "python manage.py runserver 
+4. Run "python manage.py runserver </br>
 5. Run "npm run-script build"
 
 <h3>Here are some screenshots:</h3>
