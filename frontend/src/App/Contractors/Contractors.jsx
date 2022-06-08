@@ -76,7 +76,7 @@ const Contractors = () => {
     React.useEffect(() => {
         let p0 = dispatch(fetchContractors({query_str: query, page: 1}))
         let p1 = getSiteTypes()
-        let p2 = getPrices(filterSiteType.value)
+        let p2 = getPrices(projectsFromQueryParams ? projectsFromQueryParams : filterSiteType.value)
         Promise.all([p0, p1, p2]).then(data => {
 
             const list = []
@@ -146,8 +146,6 @@ const Contractors = () => {
           // maximumSignificantDigits: 1
         });
     }
-
-    console.log('pricesObj:', pricesObj)
 
     const filterByPriceRange = (contList, pricesObj, minPrice, maxPrice) => {
 

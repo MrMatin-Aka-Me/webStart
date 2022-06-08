@@ -269,7 +269,7 @@ const Constructors = () => {
                                         <div className={'mb-1'}>Год основания: <span style={{color: 'darkgoldenrod'}}>{item.tool.foundation_year}</span></div>
                                         <div className={'mb-1'}>Бесплатный период: <span style={{color: 'darkgoldenrod'}}>{item.free_period}</span></div>
                                         <div className={'mb-1'}>Платные тарифы: <span style={{color: 'darkgoldenrod'}}>{item.min_price_for_month + ' - ' + item.max_price_for_month} руб./месяц</span></div>
-                                        <div className={'mb-1'}>Количество шаблонов: <span style={{color: 'darkgoldenrod'}}>{item.template_numbe}</span></div>
+                                        <div className={'mb-1'}>Количество шаблонов: <span style={{color: 'darkgoldenrod'}}>{item.template_number}</span></div>
                                         <div className={'mb-1'}>Подходит для: {item.site_types.map(el => (
                                             <span key={uuidv4()} style={{color: el.id === siteTypeSelectValue.value ? 'darkblue' : 'darkgoldenrod'}}>{el.type + ' '}</span>
                                         ))}</div>
