@@ -1,5 +1,5 @@
 # WebStart
-A Web Application that recommend types of sites and how to build them according to user`s goals.
+A Web Application that recommends types of sites and how to build them according to user`s goals.
 
 <h3>How to run:</h3>
 1. Clone the project </br>
